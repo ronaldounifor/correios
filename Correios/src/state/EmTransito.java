@@ -10,11 +10,12 @@ public class EmTransito extends State {
 
     public EmTransito(Remessa remessa) {
         this.remessa = remessa;
+        this.remessa.notificar();
     }
 
     @Override
     public String getSituacao() {
-        return "Vai chegar!";
+        return "Em Trânsito";
     }
 
     @Override

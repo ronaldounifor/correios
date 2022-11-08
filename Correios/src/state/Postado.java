@@ -6,11 +6,12 @@ public class Postado extends State {
 
     public Postado(Remessa remessa) {
         this.remessa = remessa;
+        this.remessa.notificar();
     }
 
     @Override
     public String getSituacao() {
-        return "Remessa "+remessa.getProtocolo()+" foi postada no centro de distribuição";
+        return "Postado";
     }
 
     @Override

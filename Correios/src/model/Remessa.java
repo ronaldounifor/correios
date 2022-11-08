@@ -1,10 +1,15 @@
 package model;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
+import observer.Observavel;
 import state.Postado;
 import state.State;
+import util.Mensagem;
 
-public class Remessa {
+public class Remessa extends Observavel  {
     private int protocolo;
     private double peso;
     private double altura;
@@ -25,6 +30,7 @@ public class Remessa {
         this.remetente = remetente;
         this.destinatario = destinatario;
         this.estado = new Postado(this);
+        this.protocolo = new Random().nextInt(15000);
     }
 
     public String getSituacao() {
@@ -115,6 +121,31 @@ public class Remessa {
 
     public void setProtocolo(int protocolo) {
         this.protocolo = protocolo;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder textoRemesa = new StringBuilder();
+
+        textoRemesa.append(Mensagem.SEPARADOR).append(protocolo).append(" (").append(estado.getSituacao()).append(") --------");
+        textoRemesa.append(System.lineSeparator());
+        textoRemesa.append(Mensagem.DIMENSOES).append(altura).append(" x ").append(largura).append(" x ").append(profundidade);
+        textoRemesa.append(System.lineSeparator());
+        textoRemesa.append("Peso: ").append(peso).append(" kg");
+        textoRemesa.append(System.lineSeparator());
+        textoRemesa.append("De: ").append(remetente.getNome()).append(", Para: ").append(destinatario.getNome());
+        textoRemesa.append(System.lineSeparator());
+
+        DateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        if(dataEnvio != null)
+            textoRemesa.append("Enviado em: ").append(formatador.format(dataEnvio));
+        
+        textoRemesa.append(System.lineSeparator());
+
+        if(dataRecebimento != null)
+            textoRemesa.append("Recebido em: ").append(formatador.format(dataRecebimento));
+        
+        return textoRemesa.toString();
     }
 
     

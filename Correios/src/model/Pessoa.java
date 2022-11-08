@@ -1,5 +1,9 @@
 package model;
-public class Pessoa {
+
+import observer.Observador;
+import observer.Observavel;
+
+public class Pessoa implements Observador {
     private String endereco;
     private String nome;
     private long id;
@@ -32,6 +36,14 @@ public class Pessoa {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public void atualizar(Observavel observavel) {
+        Remessa remessa = (Remessa) observavel;
+
+        System.out.println("RECEBI NOTIFICAÇÃO!");
+        System.out.println(remessa);
     }
 
     

@@ -6,6 +6,7 @@ public class Recebido extends State {
 
     public Recebido(Remessa remessa) {
         this.remessa = remessa;
+        this.remessa.notificar();
     }
 
     @Override
